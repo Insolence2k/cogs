@@ -184,7 +184,7 @@ class baited:
         """
         !servers implemented as [p]connect. Takes 2 arguments [server number] and [server region] the latter is optional.
         """
-        embed = Embed(title="No server selected showing connection info :wave~1:", color=0xfffff0)
+        embed = Embed(title="No server selected showing connection info", color=0xfffff0)
 
         args = ctx.message.content.split(" ")[1:]
 
