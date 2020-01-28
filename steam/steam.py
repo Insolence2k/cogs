@@ -373,7 +373,7 @@ class steam:
                         one_message = True
                 
                 # Using less-faceit for -steam also
-                faceit = get_bans_by_int64(result["steamid64"])
+                faceit = get_faceit_by_int64(result["steamid64"])
                 faceit_embed = Embed()
 
                 print(faceit)
