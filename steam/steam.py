@@ -319,7 +319,8 @@ class steam:
                     matches = get_close_matches(result_only, opt)
                     if len(matches) >= 1:
                         kn = matches[0]
-                        embed.add_field(name=kn.upper().replace("_", " "), value=result[kn])
+                        # Make copy pastable on phone.
+                        embed.title = result[kn]
 
                         if not one_message:
                             await ctx.bot.send_message(ctx.message.channel, embed=embed)
