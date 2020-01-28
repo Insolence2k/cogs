@@ -248,6 +248,39 @@ def get_profile_by_steam(inp, isadmin = False):
 
     return ret
 
+def get_faceit_by_int64(int64, extended = False):
+    get_png_skill = lambda i: "https://eloboss.net/static/img/gds/faceit-{}.png".format(str(i-1)) if i in range(1, 11) else ""
+
+    auth = {
+        "accept":"application/json",
+        "Authorization":"Bearer 1bd1709d-46a9-4d60-8aa3-08deb83e5ae7"
+    }
+
+    url = "https://open.faceit.com/data/v4/players?game=csgo&game_player_id=" + str(int64)
+    res = json.loads(requests.get(url, headers=auth).text)
+
+    # check if account exists
+    if "player_id" in res.keys() and "csgo" in res["games"].keys():
+        faceit = {
+            "nickname":res["nickname"],
+            "faceit_url":res["faceit_url"].replace("{lang}", "en"),
+            "region":res["games"]["csgo"]["region"],
+            "skill_level":res["games"]["csgo"]["skill_level"],
+            "skill_level":get_png_skill(int(res["games"]["csgo"]["skill_level"])),
+            "elo":res["games"]["csgo"]["faceit_elo"]
+        }
+        
+        # get more data yay!
+        if extended:
+            url = "https://open.faceit.com/data/v4/players/{}/stats/csgo".format(res["player_id"])
+            res = json.loads(requests.get(url, headers=auth).text)
+            faceit.update(res["lifetime"])
+
+        return faceit
+    else:
+        # account does not exist
+        return False
+
 # Classname should be CamelCase and the same spelling as the folder
 class steam:
     def __init__(self, bot: commands.Bot):
@@ -260,8 +293,10 @@ class steam:
     @commands.command(pass_context=True)
     async def steam(self, ctx):
         """
-        1: [steam reference] ie. steamID, steamID3, steamID64, a customURL or a full URL
-        2: [result only] name of element to return ie. steamid or profile url (optional)
+        -steam [steam reference] (result only) -> Returns information on steam profile
+
+        [steam reference] ie. steamID, steamID3, steamID64, a customURL or a full URL
+        [result only] name of element to return ie. steamid or profile url (optional)
 
         Some valid examples:
 
@@ -335,6 +370,19 @@ class steam:
                         await ctx.bot.send_message(ctx.message.channel, embed=embed)
                         one_message = True
                 
+                # Using less-faceit for -steam also
+                faceit = get_bans_by_int64(result["steamid64"])
+                faceit_embed = Embed()
+
+                if faceit:
+                    faceit_embed.title = "Found faceit profile {} for steam {}".format(faceit["nickname"], steam_reference)
+                    faceit_embed.set_thumbnail(faceit["skill_level_img"])
+                    faceit_embed.add_field(name="Skill Level", value=faceit["skill_level"])
+                    faceit_embed.add_field(name="Elo", value=faceit["elo"])
+                    faceit_embed.add_field(name="Region", value=faceit["region"])
+                    await ctx.bot.send_message(ctx.message.channel, embed=faceit_embed)
+
+                
                 # CHECK FOR VAC BANS SEPERATE OF THE ONE MESSAGE LOOP
                 # Check for vac bans
                 bans = get_bans_by_int64(result["steamid64"])
@@ -375,6 +423,76 @@ class steam:
                 one_message = True
         
         await self.bot.delete_message(ctx.message) # delete message when done
+
+    @commands.command(pass_context=True)
+   async def faceit(self, ctx):
+        """
+        -faceit [steam reference] -> Returns detailed information on faceit profile
+        """
+
+        one_message = False
+
+        try:
+            com = ctx.message.content.split(" ")
+            steam_reference = ""
+
+            if len(com) <= 1:
+                if not one_message:
+                    await ctx.bot.send_message(ctx.message.channel, "> No steam reference given.")
+                    one_message = True
+
+            else:
+                steam_reference = com[1]
+            
+
+            # Clean steam reference here also, just to get the correct output later on.
+            steam_reference = clean_steam_reference(steam_reference)
+
+            steam_reference_type = get_reference_type(steam_reference)
+
+            if steam_reference_type == "steamid64":
+                steam_reference = int(steam_reference)
+            elif steam_reference_type == "steamid":
+                steam_reference = get_int64_by_steamid(steam_reference)
+            elif steam_reference_type == "steamid3":
+                steam_reference = get_int64_by_steamid3(steam_reference)s
+            else:
+                steam_reference = 0 # Makes result return false
+
+            result = get_faceit_by_int64(steam_reference)
+
+            if result:
+                icon = result["avatar"]
+                del result["avatar"]
+
+                embed = Embed(color=0xd6c8ff)
+                embed.set_author(name=get_title_for_box(steam_reference, result["nickname"]), url=result["faceit_url"], icon_url=icon)
+                embed.set_footer(text="Results provided by Faceit. Author: 4ppl3#0018")
+
+                
+                for kn in result.keys():
+                    if result[kn] != "None":
+                        embed.add_field(name=kn.upper().replace("_", " "), value=result[kn])
+                    else:
+                        continue
+
+                if not one_message:
+                        await ctx.bot.send_message(ctx.message.channel, embed=embed)
+                        one_message = True
+
+            else:
+                if not one_message:
+                    await ctx.bot.send_message(ctx.message.channel, "> Faceit profile could not be found.")
+                    one_message = True
+
+        except Exception as e:
+            print(e)
+            if not one_message:
+                await ctx.bot.send_message(ctx.message.channel, "> Failed to load faceit api. See console for error dump.")
+                one_message = True
+        
+        await self.bot.delete_message(ctx.message) # delete message when done
+
 
 def setup(bot):
     bot.add_cog(steam(bot))  
