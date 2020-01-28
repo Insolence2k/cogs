@@ -241,6 +241,7 @@ class baited:
         """
         embed = Embed(title="https://baited.xyz/F4S", url="https://baited.xyz/F4S", color=0x00e1ff)
         embed.set_author(name="Fill out a hurt feelings report here.")
+        embed.set_image(url="https://i.imgur.com/auHJ850.png") # Hard coded thumbnail
         await self.bot.say(embed=embed)
         await self.bot.delete_message(ctx.message)
 

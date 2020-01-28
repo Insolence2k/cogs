@@ -278,7 +278,7 @@ def get_faceit_by_int64(int64, extended = False):
             faceit["Recent Results"] = ', '.join(faceit["Recent Results"]).replace("0", "L").replace("1", "W")
             del faceit["Total Headshots %"]
         
-        faceit["faceit_url"] = str(res["faceit_url"].replace("{lang}", "en")),
+        faceit["faceit_url"] = res["faceit_url"].replace("{lang}", "en")
 
         return faceit
     else:
@@ -381,10 +381,10 @@ class steam:
                 if faceit:
                     faceit_embed.title = "Found faceit profile {} for steam {}".format(faceit["nickname"], steam_reference)
                     faceit_embed.set_thumbnail(url=faceit["skill_level_img"])
-                    faceit_embed.add_field(name="Skill Level", value=faceit["skill_level"])
-                    faceit_embed.add_field(name="Elo", value=faceit["elo"])
-                    faceit_embed.add_field(name="Region", value=faceit["region"])
-                    faceit_embed.add_field(name="Faceit Profile", value=faceit["faceit_url"])
+                    faceit_embed.add_field(name="SKILL LEVEL", value=faceit["skill_level"])
+                    faceit_embed.add_field(name="ELO", value=faceit["elo"])
+                    faceit_embed.add_field(name="REGION", value=faceit["region"])
+                    faceit_embed.add_field(name="FACEIT URL", value=faceit["faceit_url"])
                     await ctx.bot.send_message(ctx.message.channel, embed=faceit_embed)
 
                 
