@@ -376,6 +376,8 @@ class steam:
                 faceit = get_bans_by_int64(result["steamid64"])
                 faceit_embed = Embed()
 
+                print(faceit)
+
                 if faceit:
                     faceit_embed.title = "Found faceit profile {} for steam {}".format(faceit["nickname"], steam_reference)
                     faceit_embed.set_thumbnail(faceit["skill_level_img"])
