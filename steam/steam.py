@@ -463,7 +463,7 @@ class steam:
             result = get_faceit_by_int64(steam_reference)
 
             if result:
-                icon = result["avatar"]
+                icon = result["avatar"] or "https://developers.faceit.com/static/media/card-placeholder.de65b7a4.png"
                 thumb = result["skill_level_img"]
                 del result["avatar"]
                 del result["skill_level_img"]
@@ -471,7 +471,7 @@ class steam:
                 embed = Embed(color=0xd6c8ff)
                 embed.set_author(name="Found faceit profile {} for steam {}".format(result["nickname"], steam_reference), icon_url=icon)
                 embed.set_footer(text="Results provided by Faceit. Author: 4ppl3#0018")
-                embed.set_thumbnail(url=)
+                embed.set_thumbnail(url=thumb)
 
                 
                 for kn in result.keys():
