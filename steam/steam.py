@@ -264,7 +264,6 @@ def get_faceit_by_int64(int64, extended = False):
         faceit = {
             "nickname":res["nickname"],
             "avatar":res["avatar"],
-            "faceit_url":res["faceit_url"].replace("{lang}", "en"),
             "region":res["games"]["csgo"]["region"],
             "skill_level":res["games"]["csgo"]["skill_level"],
             "skill_level_img":get_png_skill(int(res["games"]["csgo"]["skill_level"])),
@@ -276,6 +275,8 @@ def get_faceit_by_int64(int64, extended = False):
             url = "https://open.faceit.com/data/v4/players/{}/stats/csgo".format(res["player_id"])
             res = json.loads(requests.get(url, headers=auth).text)
             faceit.update(res["lifetime"])
+        
+        faceit["faceit_url"] = res["faceit_url"].replace("{lang}", "en"),
 
         return faceit
     else:
@@ -460,7 +461,7 @@ class steam:
             else:
                 steam_reference = 0 # Makes result return false
 
-            result = get_faceit_by_int64(steam_reference)
+            result = get_faceit_by_int64(steam_reference, True)
 
             if result:
                 icon = result["avatar"] or "https://developers.faceit.com/static/media/card-placeholder.de65b7a4.png"
