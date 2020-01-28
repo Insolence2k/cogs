@@ -267,7 +267,7 @@ def get_faceit_by_int64(int64, extended = False):
             "faceit_url":res["faceit_url"].replace("{lang}", "en"),
             "region":res["games"]["csgo"]["region"],
             "skill_level":res["games"]["csgo"]["skill_level"],
-            "skill_level":get_png_skill(int(res["games"]["csgo"]["skill_level"])),
+            "skill_level_img":get_png_skill(int(res["games"]["csgo"]["skill_level"])),
             "elo":res["games"]["csgo"]["faceit_elo"]
         }
         
@@ -464,11 +464,14 @@ class steam:
 
             if result:
                 icon = result["avatar"]
+                thumb = result["skill_level_img"]
                 del result["avatar"]
+                del result["skill_level_img"]
 
                 embed = Embed(color=0xd6c8ff)
                 embed.set_author(name="Found faceit profile {} for steam {}".format(result["nickname"], steam_reference), icon_url=icon)
                 embed.set_footer(text="Results provided by Faceit. Author: 4ppl3#0018")
+                embed.set_thumbnail(url=)
 
                 
                 for kn in result.keys():
