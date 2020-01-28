@@ -275,8 +275,10 @@ def get_faceit_by_int64(int64, extended = False):
             url_e = "https://open.faceit.com/data/v4/players/{}/stats/csgo".format(res["player_id"])
             res_e = json.loads(requests.get(url_e, headers=auth).text)
             faceit.update(res_e["lifetime"])
+            faceit["Recent Results"] = ', '.join(faceit["Recent Results"]).replace("0", "L").replace("1", "W")
+            del faceit["Total Headshots %"]
         
-        faceit["faceit_url"] = res["faceit_url"].replace("{lang}", "en"),
+        faceit["faceit_url"] = str(res["faceit_url"].replace("{lang}", "en")),
 
         return faceit
     else:
@@ -382,6 +384,7 @@ class steam:
                     faceit_embed.add_field(name="Skill Level", value=faceit["skill_level"])
                     faceit_embed.add_field(name="Elo", value=faceit["elo"])
                     faceit_embed.add_field(name="Region", value=faceit["region"])
+                    faceit_embed.add_field(name="Faceit Profile", value=faceit["faceit_url"])
                     await ctx.bot.send_message(ctx.message.channel, embed=faceit_embed)
 
                 

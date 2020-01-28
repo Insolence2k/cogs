@@ -234,5 +234,15 @@ class baited:
         await self.bot.say(embed=embed)
         await self.bot.delete_message(ctx.message)
 
+    @commands.command(pass_context=True)
+    async def complain(self, ctx):
+        """
+        Command that links our hurt feelings form. (f4s)
+        """
+        embed = Embed(title="https://baited.xyz/F4S", url="https://baited.xyz/F4S", color=0x00e1ff)
+        embed.set_author(name="Fill out a hurt feelings report here.")
+        await self.bot.say(embed=embed)
+        await self.bot.delete_message(ctx.message)
+
 def setup(bot):
     bot.add_cog(baited(bot))  
