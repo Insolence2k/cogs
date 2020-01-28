@@ -455,7 +455,7 @@ class steam:
             elif steam_reference_type == "steamid":
                 steam_reference = get_int64_by_steamid(steam_reference)
             elif steam_reference_type == "steamid3":
-                steam_reference = get_int64_by_steamid3(steam_reference)s
+                steam_reference = get_int64_by_steamid3(steam_reference)
             else:
                 steam_reference = 0 # Makes result return false
 
