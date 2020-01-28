@@ -467,12 +467,12 @@ class steam:
                 del result["avatar"]
 
                 embed = Embed(color=0xd6c8ff)
-                embed.set_author(name=get_title_for_box(steam_reference, result["nickname"]), url=result["faceit_url"], icon_url=icon)
+                embed.set_author(name="Found faceit profile {} for steam {}".format(result["nickname"], steam_reference), icon_url=icon)
                 embed.set_footer(text="Results provided by Faceit. Author: 4ppl3#0018")
 
                 
                 for kn in result.keys():
-                    if result[kn] != "None":
+                    if result[kn]:
                         embed.add_field(name=kn.upper().replace("_", " "), value=result[kn])
                     else:
                         continue
