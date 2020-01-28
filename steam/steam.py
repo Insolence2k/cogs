@@ -272,9 +272,9 @@ def get_faceit_by_int64(int64, extended = False):
         
         # get more data yay!
         if extended:
-            url = "https://open.faceit.com/data/v4/players/{}/stats/csgo".format(res["player_id"])
-            res = json.loads(requests.get(url, headers=auth).text)
-            faceit.update(res["lifetime"])
+            url_e = "https://open.faceit.com/data/v4/players/{}/stats/csgo".format(res["player_id"])
+            res_e = json.loads(requests.get(url_e, headers=auth).text)
+            faceit.update(res_e["lifetime"])
         
         faceit["faceit_url"] = res["faceit_url"].replace("{lang}", "en"),
 
