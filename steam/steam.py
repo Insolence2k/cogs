@@ -378,7 +378,7 @@ class steam:
 
                 if faceit:
                     faceit_embed.title = "Found faceit profile {} for steam {}".format(faceit["nickname"], steam_reference)
-                    faceit_embed.set_thumbnail(faceit["skill_level_img"])
+                    faceit_embed.set_thumbnail(url=faceit["skill_level_img"])
                     faceit_embed.add_field(name="Skill Level", value=faceit["skill_level"])
                     faceit_embed.add_field(name="Elo", value=faceit["elo"])
                     faceit_embed.add_field(name="Region", value=faceit["region"])
