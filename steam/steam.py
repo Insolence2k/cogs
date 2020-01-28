@@ -320,7 +320,8 @@ class steam:
                     if len(matches) >= 1:
                         kn = matches[0]
                         # Make copy pastable on phone.
-                        embed.title = result[kn]
+                        embed = Embed() # reset it
+                        embed.title = result[kn] # make it only contain return element
 
                         if not one_message:
                             await ctx.bot.send_message(ctx.message.channel, embed=embed)
