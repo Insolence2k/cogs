@@ -425,7 +425,7 @@ class steam:
         await self.bot.delete_message(ctx.message) # delete message when done
 
     @commands.command(pass_context=True)
-   async def faceit(self, ctx):
+    async def faceit(self, ctx):
         """
         -faceit [steam reference] -> Returns detailed information on faceit profile
         """
