@@ -380,6 +380,7 @@ class steam:
                 # Using less-faceit for -steam also
                 faceit = get_faceit_by_int64_or_nick(result["steamid64"])
                 faceit_embed = Embed()
+                print(faceit)
 
                 if faceit:
                     faceit_embed.title = "Found faceit profile {} for steam {}".format(faceit["nickname"], steam_reference)
