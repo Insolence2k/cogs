@@ -263,7 +263,7 @@ def get_faceit_by_int64_or_nick(indentifier, extended = False):
     if "player_id" in res.keys() and "csgo" in res["games"].keys():
         faceit = {
             "nickname":res["nickname"],
-            "steamid64":res["game_player_id"]
+            "steamid64":res["game_player_id"],
             "avatar":res["avatar"],
             "region":res["games"]["csgo"]["region"],
             "skill_level":res["games"]["csgo"]["skill_level"],
