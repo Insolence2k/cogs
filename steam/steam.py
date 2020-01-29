@@ -26,7 +26,7 @@ def get_reference_type(steam_reference):
         return "customurl"
 
 def clean_steam_reference(steam_reference):
-    if "://steamcommunity.com/" in steam_reference:
+    if "://" in steam_reference:
         sid_split = steam_reference.split("/")
         if steam_reference.endswith("/"):
             steam_reference = sid_split[:-1].pop()
@@ -248,7 +248,7 @@ def get_profile_by_steam(inp, isadmin = False):
 
     return ret
 
-def get_faceit_by_int64(int64, extended = False):
+def get_faceit_by_int64_or_nick(indentifier, extended = False):
     get_png_skill = lambda i: "https://eloboss.net/static/img/gds/faceit-{}.png".format(str(i-1)) if i in range(1, 11) else ""
 
     auth = {
@@ -256,7 +256,7 @@ def get_faceit_by_int64(int64, extended = False):
         "Authorization":"Bearer 1bd1709d-46a9-4d60-8aa3-08deb83e5ae7"
     }
 
-    url = "https://open.faceit.com/data/v4/players?game=csgo&game_player_id=" + str(int64)
+    url = "https://open.faceit.com/data/v4/players?game=csgo&game_player_id=" + str(indentifier) if type(indentifier) == int else "https://open.faceit.com/data/v4/players?nickname={}&game=csgo".format(indentifier)
     res = json.loads(requests.get(url, headers=auth).text)
 
     # check if account exists
@@ -375,7 +375,7 @@ class steam:
                         one_message = True
                 
                 # Using less-faceit for -steam also
-                faceit = get_faceit_by_int64(result["steamid64"])
+                faceit = get_faceit_by_int64_or_nick(result["steamid64"])
                 faceit_embed = Embed()
 
                 if faceit:
@@ -462,9 +462,9 @@ class steam:
             elif steam_reference_type == "steamid3":
                 steam_reference = get_int64_by_steamid3(steam_reference)
             else:
-                steam_reference = 0 # Makes result return false
+                steam_reference = steam_reference # assume it's a faceit nick
 
-            result = get_faceit_by_int64(steam_reference, True)
+            result = get_faceit_by_int64_or_nick(steam_reference, True)
 
             if result:
                 icon = result["avatar"] or "https://developers.faceit.com/static/media/card-placeholder.de65b7a4.png"
