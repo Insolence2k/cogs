@@ -256,7 +256,7 @@ def get_faceit_by_int64_or_nick(indentifier, extended = False):
         "Authorization":"Bearer 1bd1709d-46a9-4d60-8aa3-08deb83e5ae7"
     }
 
-    url = "https://open.faceit.com/data/v4/players?game=csgo&game_player_id=" + str(indentifier) if type(indentifier) == int else "https://open.faceit.com/data/v4/players?nickname={}&game=csgo".format(indentifier)
+    url = "https://open.faceit.com/data/v4/players?game=csgo&game_player_id=" + str(indentifier) if type(indentifier) == int or indentifier.isnumeric() else "https://open.faceit.com/data/v4/players?nickname={}&game=csgo".format(indentifier)
     res = json.loads(requests.get(url, headers=auth).text)
 
     # check if account exists
@@ -380,7 +380,7 @@ class steam:
                 # Using less-faceit for -steam also
                 faceit = get_faceit_by_int64_or_nick(result["steamid64"])
                 faceit_embed = Embed()
-                print(faceit)
+                print(faceit, result["steamid64"])
 
                 if faceit:
                     faceit_embed.title = "Found faceit profile {} for steam {}".format(faceit["nickname"], steam_reference)
