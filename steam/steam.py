@@ -274,9 +274,11 @@ def get_faceit_by_int64_or_nick(indentifier, extended = False):
         if extended:
             url_e = "https://open.faceit.com/data/v4/players/{}/stats/csgo".format(res["player_id"])
             res_e = json.loads(requests.get(url_e, headers=auth).text)
-            faceit.update(res_e["lifetime"])
-            faceit["Recent Results"] = ', '.join(faceit["Recent Results"]).replace("0", "L").replace("1", "W")
-            del faceit["Total Headshots %"]
+            if "lifetime" in res_e.keys():
+                faceit.update(res_e["lifetime"])
+                faceit["Recent Results"] = ', '.join(faceit["Recent Results"]).replace("0", "L").replace("1", "W")
+                del faceit["Total Headshots %"]
+                del faceit["K/D Ratio"]
         
         faceit["faceit_url"] = res["faceit_url"].replace("{lang}", "en")
 
