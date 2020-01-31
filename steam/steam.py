@@ -380,10 +380,9 @@ class steam:
                 # Using less-faceit for -steam also
                 faceit = get_faceit_by_int64_or_nick(result["steamid64"])
                 faceit_embed = Embed(color=0xdf5c28)
-                print(faceit, result["steamid64"])
 
                 if faceit:
-                    faceit_embed.set_author(name="Found faceit profile {} for steam {}".format(faceit["nickname"], steam_reference), icon=faceit["avatar"])
+                    faceit_embed.set_author(name="Found faceit profile {} for steam {}".format(faceit["nickname"], steam_reference), icon_url=faceit["avatar"])
                     faceit_embed.set_thumbnail(url=faceit["skill_level_img"])
                     faceit_embed.add_field(name="SKILL LEVEL", value=faceit["skill_level"])
                     faceit_embed.add_field(name="ELO", value=faceit["elo"])
@@ -471,7 +470,7 @@ class steam:
             result = get_faceit_by_int64_or_nick(steam_reference, True)
 
             if result:
-                icon = result["avatar"] or "https://developers.faceit.com/static/media/card-placeholder.de65b7a4.png"
+                icon = result["avatar"]
                 thumb = result["skill_level_img"]
                 del result["avatar"]
                 del result["skill_level_img"]
