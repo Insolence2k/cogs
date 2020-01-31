@@ -264,7 +264,7 @@ def get_faceit_by_int64_or_nick(indentifier, extended = False):
         faceit = {
             "nickname":res["nickname"],
             "steamid64":res["games"]["csgo"]["game_player_id"],
-            "avatar":res["avatar"],
+            "avatar":res["avatar"] or "https://i.imgur.com/KmXNNl8.jpg",
             "region":res["games"]["csgo"]["region"],
             "skill_level":res["games"]["csgo"]["skill_level"],
             "skill_level_img":get_png_skill(int(res["games"]["csgo"]["skill_level"])),
@@ -347,7 +347,7 @@ class steam:
 
                 embed = Embed(color=0xd6c8ff)
                 embed.set_author(name=get_title_for_box(steam_reference, result["profile_name"]), url=result["profile_url"], icon_url=icon)
-                embed.set_footer(text="Results provided by Valve. Author: 4ppl3#0018")
+                embed.set_footer(text="Results provided by Valve. Author: apple#0018")
 
                 if not result_only:
                     for kn in result.keys():
@@ -379,11 +379,11 @@ class steam:
                 
                 # Using less-faceit for -steam also
                 faceit = get_faceit_by_int64_or_nick(result["steamid64"])
-                faceit_embed = Embed()
+                faceit_embed = Embed(color=0xdf5c28)
                 print(faceit, result["steamid64"])
 
                 if faceit:
-                    faceit_embed.title = "Found faceit profile {} for steam {}".format(faceit["nickname"], steam_reference)
+                    faceit_embed.set_author(name="Found faceit profile {} for steam {}".format(faceit["nickname"], steam_reference), icon=faceit["avatar"])
                     faceit_embed.set_thumbnail(url=faceit["skill_level_img"])
                     faceit_embed.add_field(name="SKILL LEVEL", value=faceit["skill_level"])
                     faceit_embed.add_field(name="ELO", value=faceit["elo"])
@@ -476,9 +476,9 @@ class steam:
                 del result["avatar"]
                 del result["skill_level_img"]
 
-                embed = Embed(color=0xd6c8ff)
+                embed = Embed(color=0xdf5c28)
                 embed.set_author(name="Found faceit profile {} for steam {}".format(result["nickname"], steam_reference), icon_url=icon)
-                embed.set_footer(text="Results provided by Faceit. Author: 4ppl3#0018")
+                embed.set_footer(text="Results provided by Faceit. Author: apple#0018")
                 embed.set_thumbnail(url=thumb)
 
                 
