@@ -259,7 +259,7 @@ class baited:
         else:
             await self.bot.say("""```-google <search_terms>
 
-            Creates a google link```
+Creates a google link```
             """)
 
 def setup(bot):
