@@ -257,8 +257,9 @@ class baited:
             google_search = "https://google.com/search?q=" + search_query
             await self.bot.say(google_search)
         else:
-            await self.bot.say("""```-google <search_terms> \
-            Creates a google link``` \
+            await self.bot.say("""```-google <search_terms>
+
+            Creates a google link```
             """)
 
 def setup(bot):
