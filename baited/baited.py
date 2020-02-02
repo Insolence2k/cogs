@@ -244,6 +244,26 @@ class baited:
         embed.set_image(url="https://i.imgur.com/auHJ850.png") # Hard coded thumbnail
         await self.bot.say(embed=embed)
         await self.bot.delete_message(ctx.message)
+    
+    @commands.command(pass_context=True)
+    async def google(self, ctx):
+        """
+        [p]google <search_terms> Let's you search with google.
+        """
+        args = ctx.message.content.split(" ")[1:]
+        
+        if len(args) > 0:
+            search_query = '+'.join(args)
+            google_search = "https://google.com/search?q=" + search_query
+            await self.bot.say(google_search)
+        else:
+            await self.bot.say("""
+            ```
+            -google <search_terms>
+
+            Creates a google link
+            ```
+            """)
 
 def setup(bot):
     bot.add_cog(baited(bot))  
