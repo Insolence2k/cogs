@@ -132,7 +132,7 @@ class dayssince:
                     if not self.reaction:
                         self.reaction = reaction
 
-                    data = self.jp.get()
+                    data = meltdown_stats
                     data[str(user.id)]["m"] = time.time()
                     data[str(user.id)]["c"] = 1 + data[str(user.id)]["c"] if data[str(user.id)]["c"] else 0
                     print(data)
@@ -141,12 +141,6 @@ class dayssince:
                     await meltdown_message.edit(embed=meltdown_embed)
 
         await self.bot.delete_message(ctx.message)
-
-    def storage_get(self):
-        return self.jp.get()
-    
-    def storage_set(self, data):
-        return self.jp.update(data)
 
 def setup(bot):
     bot.add_cog(dayssince(bot))
