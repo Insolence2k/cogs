@@ -4,11 +4,6 @@ import json
 import requests
 from discord.ext import commands
 
-jsonpool_auth = {
-    "id":"BJQPuKBGU",
-    "auth":"64d673bda59506e5a77a263beb0ae0de"
-}
-
 """
 class JsonPool
 dynamic JsonPool object for communication with a jsonpool service
@@ -94,7 +89,7 @@ class JsonPool:
 class dayssince:
     def __init__(self, bot: commands.Bot):
         self.bot = bot
-        self.jp = JsonPool(jsonpool_auth["id"], jsonpool_auth["auth"])
+        self.jp = JsonPool("HkRHdsBfU", "7b4a90a2aa2ef1129da15a527b65b349")
         self.reaction = None
 
     @commands.command(pass_context=True)
