@@ -11,7 +11,7 @@ class dayssince:
         mono meltdown
         """
         for Member in ctx.message.mentions:
-            await self.bot.send_message(Member.id)
+            await self.bot.send_message(ctx.message.channel, str(Member))
         
         await self.bot.delete_message(ctx.message)
     
