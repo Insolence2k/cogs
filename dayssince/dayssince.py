@@ -138,7 +138,8 @@ class dayssince:
                     data = self.jp.get()
                     data[str(user.id)]["m"] = time.time()
                     data[str(user.id)]["c"] = 1 + data[str(user.id)]["c"] if data[str(user.id)]["c"] else 0
-                    self.jp.update(data)
+                    print(data)
+                    self.jp.update(data, override=1)
 
                     await meltdown_message.edit(embed=meltdown_embed)
 
