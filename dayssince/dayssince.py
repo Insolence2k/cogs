@@ -114,7 +114,7 @@ class dayssince:
             meltdown_user = ctx.message.author
         
         meltdown_embed.title = "Last meltdown for {}".format(str(meltdown_user))
-        meltdown_user_stats = meltdown_stats[str(meltdown_user.id)] if if str(meltdown_user.id) in meltdown_stats.keys() else None
+        meltdown_user_stats = meltdown_stats[str(meltdown_user.id)] if str(meltdown_user.id) in meltdown_stats.keys() else None
         meltdown_embed.description = "{} Days Ago. {} Meltdowns so far".format(meltdown_user_stats["m"], meltdown_user_stats["c"]) if meltdown_user_stats else "No meltdowns!"
         
         meltdown_message = await self.bot.send_message(ctx.message.channel, embed=meltdown_embed)
