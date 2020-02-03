@@ -125,6 +125,9 @@ class dayssince:
                     meltdown_stats[str(user.id)] = meltdown_stats[str(user.id)] if str(user.id) in meltdown_stats.keys() else {}
                     meltdown_stats[str(user.id)]["m"] = time.time()
                     meltdown_stats[str(user.id)]["c"] = 1 + (meltdown_stats[str(user.id)]["c"] if meltdown_stats[str(user.id)]["c"] else 0)
+
+                    print(meltdown_stats)
+
                     self.jp.update(meltdown_stats)
 
                     await meltdown_message.edit(embed=self.make_embed(meltdown_stats, meltdown_user))
