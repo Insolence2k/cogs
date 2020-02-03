@@ -10,7 +10,16 @@ class dayssince:
         """
         mono meltdown
         """
-        return
+        for Member in ctx.message.mentions:
+            await self.bot.send_message(Member.id)
+        
+        await self.bot.delete_message(ctx.message)
     
+    def storage_get():
+        return data
+    
+    def storage_set(data):
+        return
+
 def setup(bot):
     bot.add_cog(dayssince(bot))
