@@ -112,12 +112,16 @@ class dayssince:
             meltdown_user = ctx.message.author
         
         meltdown_message = await self.bot.send_message(ctx.message.channel, embed=meltdown_embed)
-        await self.bot.add_reaction(meltdown_message, "dart")
+        (await self.bot.add_reaction(meltdown_message, self.reaction) if self.reaction else None)
 
         @self.bot.event
         async def on_reaction_add(reaction, user):
             if not self.reaction:
                 self.reaction = reaction
+            
+            elif self.reaction:
+                if not reaction == self.reaction:
+                    return
 
             if reaction.message.id == meltdown_message.id:
                 if user == meltdown_user:
