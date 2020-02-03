@@ -102,6 +102,8 @@ class dayssince:
         """
         mono meltdown
         """
+        meltdown_stats = self.storage_get()
+
         meltdown_time = time.time()
         meltdown_embed = discord.Embed()
         meltdown_user = discord.Member
@@ -110,6 +112,8 @@ class dayssince:
             meltdown_user = ctx.message.mentions[0]
         else:
             meltdown_user = ctx.message.author
+        
+        meltdown_embed.title = "{} Meltdown Info".format(meltdown_user.display_name)
         
         meltdown_message = await self.bot.send_message(ctx.message.channel, embed=meltdown_embed)
         (await self.bot.add_reaction(meltdown_message, self.reaction) if self.reaction else None)
