@@ -127,11 +127,9 @@ class dayssince:
                     meltdown_stats[str(user.id)]["m"] = time.time()
                     meltdown_stats[str(user.id)]["c"] = 1 + (meltdown_stats[str(user.id)]["c"] if "c" in meltdown_stats[str(user.id)].keys() else 0)
 
-                    print(meltdown_stats)
-
                     self.jp().update(meltdown_stats)
 
-                    await self.bot.edit_message(meltdown_message, embed=self.make_embed(meltdown_stats, meltdown_user))
+                    await self.bot.edit_message(reaction.message, embed=self.make_embed(meltdown_stats, meltdown_user))
 
         await self.bot.delete_message(ctx.message)
 
@@ -139,7 +137,7 @@ class dayssince:
         meltdown_embed = discord.Embed()
         meltdown_embed.title = "Last meltdown for {}".format(str(meltdown_user))
         meltdown_user_stats = meltdown_stats[str(meltdown_user.id)] if str(meltdown_user.id) in meltdown_stats.keys() else None
-        meltdown_embed.description = "{} days ago.\n {} meltdowns so far".format(str(math.floor(time.time() - meltdown_user_stats["m"] / 60 / 60 / 24)), str(meltdown_user_stats["c"])) if meltdown_user_stats else "No meltdowns!"
+        meltdown_embed.description = "{} days ago.\n {} meltdowns so far".format(str(math.floor((time.time() - meltdown_user_stats["m"]) / 60 / 60 / 24)), str(meltdown_user_stats["c"])) if meltdown_user_stats else "No meltdowns!"
         return meltdown_embed
 
 def setup(bot):
