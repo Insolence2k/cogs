@@ -89,7 +89,7 @@ class JsonPool:
 class dayssince:
     def __init__(self, bot: commands.Bot):
         self.bot = bot
-        self.jp = JsonPool("HkRHdsBfU", "7b4a90a2aa2ef1129da15a527b65b349")
+        self.jp = lambda: JsonPool("HkRHdsBfU", "7b4a90a2aa2ef1129da15a527b65b349")
         self.reaction = None
 
     @commands.command(pass_context=True)
@@ -98,7 +98,7 @@ class dayssince:
         mono meltdown
         """
         global meltdown_stats
-        meltdown_stats = self.jp.get()
+        meltdown_stats = self.jp().get()
         
         meltdown_user = discord.Member
 
@@ -124,11 +124,11 @@ class dayssince:
                     # meltdown_stats = self.jp.get()
                     meltdown_stats[str(user.id)] = meltdown_stats[str(user.id)] if str(user.id) in meltdown_stats.keys() else {}
                     meltdown_stats[str(user.id)]["m"] = time.time()
-                    meltdown_stats[str(user.id)]["c"] = 1 + (meltdown_stats[str(user.id)]["c"] if meltdown_stats[str(user.id)]["c"] else 0)
+                    meltdown_stats[str(user.id)]["c"] = 1 + (meltdown_stats[str(user.id)]["c"] if "c" in meltdown_stats[str(user.id)].keys() else 0)
 
                     print(meltdown_stats)
 
-                    self.jp.update(meltdown_stats)
+                    self.jp().update(meltdown_stats)
 
                     await meltdown_message.edit(embed=self.make_embed(meltdown_stats, meltdown_user))
 
