@@ -1,6 +1,6 @@
 import discord
 import time
-from dayssince.jsonpool import JsonPool
+from jsonpool import JsonPool
 from discord.ext import commands
 
 jsonpool_auth = {
