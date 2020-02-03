@@ -1,4 +1,5 @@
 import discord
+import time
 from discord.ext import commands
 
 class dayssince:
@@ -10,6 +11,7 @@ class dayssince:
         """
         mono meltdown
         """
+        meltdown_time = time.time()
         meltdown_embed = discord.Embed()
         meltdown_user = discord.Member
 
@@ -20,13 +22,16 @@ class dayssince:
         
         meltdown_message = await self.bot.send_message(ctx.message.channel, embed=meltdown_embed)
 
-        while True:
-            print(meltdown_message.reactions)
-            if meltdown_message.reactions:
-                break
+        @self.bot.event
+        async def on_reaction_add(reaction, user):
+            if reaction.message.id == meltdown_message.id:
+                if user == meltdown_user:
+                    await self.bot.send_message(reaction.message.channel, "Hello!")
 
         await self.bot.delete_message(ctx.message)
-    
+
+        self.bot.on_
+
     def storage_get():
         return data
     
