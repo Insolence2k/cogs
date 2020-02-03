@@ -102,7 +102,7 @@ class dayssince:
         """
         mono meltdown
         """
-        meltdown_stats = self.storage_get()
+        meltdown_stats = self.jp.get()
 
         meltdown_time = time.time()
         meltdown_embed = discord.Embed()
@@ -135,19 +135,19 @@ class dayssince:
                     if not self.reaction:
                         self.reaction = reaction
 
-                    data = self.storage_get()
+                    data = self.jp.get()
                     data[str(user.id)]["m"] = time.time()
                     data[str(user.id)]["c"] = 1 + data[str(user.id)]["c"] if data[str(user.id)]["c"] else 0
-                    self.storage_set(data)
+                    self.jp.update(data)
 
                     await meltdown_message.edit(embed=meltdown_embed)
 
         await self.bot.delete_message(ctx.message)
 
-    def storage_get():
+    def storage_get(self):
         return self.jp.get()
     
-    def storage_set(data):
+    def storage_set(self, data):
         return self.jp.update(data)
 
 def setup(bot):
