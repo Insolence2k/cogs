@@ -98,6 +98,7 @@ class dayssince:
         mono meltdown
         """
         meltdown_stats = self.jp.get()
+        global meltdown_stats
         meltdown_user = discord.Member
 
         if len(ctx.message.mentions) == 1:
