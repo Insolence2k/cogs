@@ -128,15 +128,13 @@ class dayssince:
             if reaction.message.id == meltdown_message.id:
                 print(user.id, meltdown_user.id)
                 if user == meltdown_user:
-                    print("LEVEL 2")
                     if not self.reaction:
                         self.reaction = reaction
 
-                    data = meltdown_stats
-                    data[str(user.id)]["m"] = time.time()
-                    data[str(user.id)]["c"] = 1 + data[str(user.id)]["c"] if data[str(user.id)]["c"] else 0
-                    print(data)
-                    print(self.jp.update(data, override=1))
+                    meltdown_stats[str(user.id)]["m"] = time.time()
+                    meltdown_stats[str(user.id)]["c"] = 1 + (meltdown_stats[str(user.id)]["c"] if meltdown_stats[str(user.id)]["c"] else 0)
+                    print(meltdown_stats)
+                    print(self.jp.update(data))
 
                     await meltdown_message.edit(embed=meltdown_embed)
 
