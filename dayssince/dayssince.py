@@ -5,8 +5,8 @@ import requests
 from discord.ext import commands
 
 jsonpool_auth = {
-    "id":"rJC9jdBMU",
-    "auth":"514429753e71887ae9aee0a0fc4beb9a"
+    "id":"BJQPuKBGU",
+    "auth":"64d673bda59506e5a77a263beb0ae0de"
 }
 
 """
