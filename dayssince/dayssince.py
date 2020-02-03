@@ -116,9 +116,15 @@ class dayssince:
 
         @self.bot.event
         async def on_reaction_add(reaction, user):
+            if not self.reaction:
+                self.reaction = reaction
+
             if reaction.message.id == meltdown_message.id:
                 if user == meltdown_user:
-                    print(reaction)
+
+                    if not self.reaction:
+                        self.reaction = reaction
+
                     await self.bot.send_message(reaction.message.channel, "Hello!")
                     await meltdown_message.edit(embed=meltdown_embed)
 
