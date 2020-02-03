@@ -103,21 +103,14 @@ class dayssince:
         mono meltdown
         """
         meltdown_stats = self.jp.get()
-
-        meltdown_time = time.time()
-        meltdown_embed = discord.Embed()
         meltdown_user = discord.Member
 
         if len(ctx.message.mentions) == 1:
             meltdown_user = ctx.message.mentions[0]
         else:
             meltdown_user = ctx.message.author
-        
-        meltdown_embed.title = "Last meltdown for {}".format(str(meltdown_user))
-        meltdown_user_stats = meltdown_stats[str(meltdown_user.id)] if str(meltdown_user.id) in meltdown_stats.keys() else None
-        meltdown_embed.description = "{} Days Ago. {} Meltdowns so far".format(meltdown_user_stats["m"], meltdown_user_stats["c"]) if meltdown_user_stats else "No meltdowns!"
-        
-        meltdown_message = await self.bot.send_message(ctx.message.channel, embed=meltdown_embed)
+    
+        meltdown_message = await self.bot.send_message(ctx.message.channel, embed=self.make_embed(meltdown_user, meltdown_stats))
         (await self.bot.add_reaction(meltdown_message, self.reaction) if self.reaction else None)
 
         @self.bot.event
@@ -130,15 +123,22 @@ class dayssince:
                 if user == meltdown_user:
                     if not self.reaction:
                         self.reaction = reaction
-
+                    # meltdown_stats = self.jp.get()
+                    meltdown_stats[str(user.id)] = meltdown_stats[str(user.id)] if str(user.id) in meltdown_stats.keys() else {}
                     meltdown_stats[str(user.id)]["m"] = time.time()
                     meltdown_stats[str(user.id)]["c"] = 1 + (meltdown_stats[str(user.id)]["c"] if meltdown_stats[str(user.id)]["c"] else 0)
-                    print(meltdown_stats)
-                    print(self.jp.update(data))
+                    self.jp.update(data)
 
-                    await meltdown_message.edit(embed=meltdown_embed)
+                    await meltdown_message.edit(embed=self.make_embed(meltdown_stats, meltdown_user))
 
         await self.bot.delete_message(ctx.message)
+
+    def make_embed(self, meltdown_user, meltdown_stats):
+        meltdown_embed = discord.Embed()
+        meltdown_embed.title = "Last meltdown for {}".format(str(meltdown_user))
+        meltdown_user_stats = meltdown_stats[str(meltdown_user.id)] if str(meltdown_user.id) in meltdown_stats.keys() else None
+        meltdown_embed.description = "{} Days Ago. {} Meltdowns so far".format(meltdown_user_stats["m"], meltdown_user_stats["c"]) if meltdown_user_stats else "No meltdowns!"
+        return meltdown_embed
 
 def setup(bot):
     bot.add_cog(dayssince(bot))
