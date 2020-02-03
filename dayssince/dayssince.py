@@ -124,14 +124,9 @@ class dayssince:
         async def on_reaction_add(reaction, user):
             if not self.reaction:
                 self.reaction = reaction.emoji
-            
-            elif self.reaction:
-                if not reaction.emoji == self.reaction:
-                    return
 
             if reaction.message.id == meltdown_message.id:
                 if user == meltdown_user:
-
                     if not self.reaction:
                         self.reaction = reaction
 
