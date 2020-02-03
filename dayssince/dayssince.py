@@ -30,8 +30,6 @@ class dayssince:
 
         await self.bot.delete_message(ctx.message)
 
-        self.bot.on_
-
     def storage_get():
         return data
     
