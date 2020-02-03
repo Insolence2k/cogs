@@ -2,6 +2,7 @@ import discord
 import time
 import json
 import requests
+import math
 from discord.ext import commands
 
 """
@@ -130,7 +131,7 @@ class dayssince:
 
                     self.jp().update(meltdown_stats)
 
-                    await meltdown_message.edit(embed=self.make_embed(meltdown_stats, meltdown_user))
+                    await self.bot.edit_message(meltdown_message, embed=self.make_embed(meltdown_stats, meltdown_user))
 
         await self.bot.delete_message(ctx.message)
 
@@ -138,7 +139,8 @@ class dayssince:
         meltdown_embed = discord.Embed()
         meltdown_embed.title = "Last meltdown for {}".format(str(meltdown_user))
         meltdown_user_stats = meltdown_stats[str(meltdown_user.id)] if str(meltdown_user.id) in meltdown_stats.keys() else None
-        meltdown_embed.description = "{} Days Ago. {} Meltdowns so far".format(meltdown_user_stats["m"], meltdown_user_stats["c"]) if meltdown_user_stats else "No meltdowns!"
+        meltdown_user_stats["m"] = math.floor(time.time() - meltdown_user_stats["m"] / 60 / 60 / 24)
+        meltdown_embed.description = "{} days ago.\n {} meltdowns so far".format(meltdown_user_stats["m"], meltdown_user_stats["c"]) if meltdown_user_stats else "No meltdowns!"
         return meltdown_embed
 
 def setup(bot):
