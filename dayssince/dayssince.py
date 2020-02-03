@@ -19,10 +19,9 @@ class dayssince:
             meltdown_user = ctx.message.author
         
         meltdown_message = await self.bot.send_message(ctx.message.channel, embed=meltdown_embed)
-        await self.bot.add_reaction(meltdown_message, "dart".encode('ascii', 'namereplace'))
 
-        while meltdown_message.reactions[0].count:
-            if len(meltdown_message.reactions[0].count) > 1:
+        while True:
+            if len(meltdown_message.reactions) > 0:
                 print(meltdown_message.reactions)
                 break
 
