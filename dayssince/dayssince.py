@@ -126,6 +126,7 @@ class dayssince:
                 self.reaction = reaction.emoji
 
             if reaction.message.id == meltdown_message.id:
+                print(user.id, meltdown_user.id)
                 if user == meltdown_user:
                     print("LEVEL 2")
                     if not self.reaction:
