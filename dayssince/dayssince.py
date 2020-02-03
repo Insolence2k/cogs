@@ -95,6 +95,7 @@ class dayssince:
     def __init__(self, bot: commands.Bot):
         self.bot = bot
         self.jp = JsonPool(jsonpool_auth["id"], jsonpool_auth["auth"])
+        self.reaction = None
 
     @commands.command(pass_context=True)
     async def meltdown(self, ctx):
@@ -111,7 +112,7 @@ class dayssince:
             meltdown_user = ctx.message.author
         
         meltdown_message = await self.bot.send_message(ctx.message.channel, embed=meltdown_embed)
-        self.bot.add_reaction(meltdown_message, "dart")
+        await self.bot.add_reaction(meltdown_message, "dart")
 
         @self.bot.event
         async def on_reaction_add(reaction, user):
