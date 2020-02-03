@@ -113,8 +113,6 @@ class dayssince:
 
         @self.bot.event
         async def on_reaction_add(reaction, user):
-            print(meltdown_stats)
-
             if not self.reaction:
                 self.reaction = reaction.emoji
 
