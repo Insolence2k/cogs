@@ -139,8 +139,7 @@ class dayssince:
         meltdown_embed = discord.Embed()
         meltdown_embed.title = "Last meltdown for {}".format(str(meltdown_user))
         meltdown_user_stats = meltdown_stats[str(meltdown_user.id)] if str(meltdown_user.id) in meltdown_stats.keys() else None
-        meltdown_user_stats["m"] = math.floor(time.time() - meltdown_user_stats["m"] / 60 / 60 / 24)
-        meltdown_embed.description = "{} days ago.\n {} meltdowns so far".format(meltdown_user_stats["m"], meltdown_user_stats["c"]) if meltdown_user_stats else "No meltdowns!"
+        meltdown_embed.description = "{} days ago.\n {} meltdowns so far".format(str(math.floor(time.time() - meltdown_user_stats["m"] / 60 / 60 / 24)), str(meltdown_user_stats["c"])) if meltdown_user_stats else "No meltdowns!"
         return meltdown_embed
 
 def setup(bot):
