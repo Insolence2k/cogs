@@ -113,7 +113,7 @@ class dayssince:
         else:
             meltdown_user = ctx.message.author
         
-        meltdown_embed.title = "{} Meltdown Info".format(meltdown_user.display_name)
+        meltdown_embed.title = "{} Meltdown Info".format(meltdown_user.name)
         
         meltdown_message = await self.bot.send_message(ctx.message.channel, embed=meltdown_embed)
         (await self.bot.add_reaction(meltdown_message, self.reaction) if self.reaction else None)
