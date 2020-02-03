@@ -119,7 +119,6 @@ class dayssince:
                 self.reaction = reaction.emoji
 
             if reaction.message.id == meltdown_message.id:
-                print(user.id, meltdown_user.id)
                 if user == meltdown_user:
                     if not self.reaction:
                         self.reaction = reaction
@@ -127,7 +126,7 @@ class dayssince:
                     meltdown_stats[str(user.id)] = meltdown_stats[str(user.id)] if str(user.id) in meltdown_stats.keys() else {}
                     meltdown_stats[str(user.id)]["m"] = time.time()
                     meltdown_stats[str(user.id)]["c"] = 1 + (meltdown_stats[str(user.id)]["c"] if meltdown_stats[str(user.id)]["c"] else 0)
-                    self.jp.update(data)
+                    self.jp.update(meltdown_stats)
 
                     await meltdown_message.edit(embed=self.make_embed(meltdown_stats, meltdown_user))
 
