@@ -21,8 +21,8 @@ class dayssince:
         meltdown_message = await self.bot.send_message(ctx.message.channel, embed=meltdown_embed)
 
         while True:
-            if len(meltdown_message.reactions) > 0:
-                print(meltdown_message.reactions)
+            print(meltdown_message.reactions)
+            if meltdown_message.reactions:
                 break
 
         await self.bot.delete_message(ctx.message)
