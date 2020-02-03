@@ -19,7 +19,7 @@ class dayssince:
             meltdown_user = ctx.message.author
         
         meltdown_message = await self.bot.send_message(ctx.message.channel, embed=meltdown_embed)
-        await self.bot.add_reaction(meltdown_message, discord.PartialEmoji("dart"))
+        await self.bot.add_reaction(meltdown_message, discord.Emoji(name="dart", guild=259861222592217090))
 
         while meltdown_message.reactions[0].count:
             if len(meltdown_message.reactions[0].count) > 1:
