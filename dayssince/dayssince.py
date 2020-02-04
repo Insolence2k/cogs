@@ -99,7 +99,7 @@ class dayssince:
         mono meltdown
         """
         global meltdown_stats
-        meltdown_stats = self.jp().get()
+        meltdown_stats = self.jp.get()
         
         meltdown_user = discord.Member
 
@@ -125,7 +125,7 @@ class dayssince:
                     meltdown_stats[str(user.id)]["m"] = time.time()
                     meltdown_stats[str(user.id)]["c"] = 1 + (meltdown_stats[str(user.id)]["c"] if "c" in meltdown_stats[str(user.id)].keys() else 0)
 
-                    self.jp().update(meltdown_stats)
+                    self.jp.update(meltdown_stats)
 
                     new_embed = self.make_embed(meltdown_stats, meltdown_user)
                     await self.bot.edit_message(meltdown_message, embed=new_embed)
