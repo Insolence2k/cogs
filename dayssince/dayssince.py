@@ -90,7 +90,7 @@ class JsonPool:
 class dayssince:
     def __init__(self, bot: commands.Bot):
         self.bot = bot
-        self.jp = lambda: JsonPool("HkRHdsBfU", "7b4a90a2aa2ef1129da15a527b65b349")
+        self.jp = lambda: JsonPool(private=1)
         self.reaction = None
 
     @commands.command(pass_context=True)
