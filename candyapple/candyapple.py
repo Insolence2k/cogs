@@ -9,7 +9,7 @@ class candyapple:
 
     @commands.command(pass_context=True)
     async def test(self, ctx):
-        await self.bot.say(ctx.message.channel, str(os.path.abspath(os.curdir)))
+        await self.bot.send_message(ctx.message.channel, str(os.path.abspath(os.curdir)))
 
 def setup(bot):
     bot.add_cog(candyapple(bot))
