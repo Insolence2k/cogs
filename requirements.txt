@@ -3,3 +3,4 @@ re==*
 json==*
 requests==*
 discord==*
+Red-DiscordBot==*
