@@ -195,7 +195,6 @@ class baited:
                     server_number = int(arg)
 
             elif arg in ["%", "?"] or "ran" in arg:
-                print(arg)
                 server_number = choice(valid_numbers_eu) if server_region == "eu" else choice(valid_numbers_na)
 
         if not server_number:
