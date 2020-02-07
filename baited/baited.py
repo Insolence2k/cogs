@@ -1,3 +1,4 @@
+from random import choice
 from discord import Embed
 from discord.ext import commands
 
@@ -22,12 +23,7 @@ BAITED_SERVERS = {
         "145.239.254.11:27125",
         "145.239.254.11:27135",
         "145.239.254.11:27145",
-        "145.239.254.11:27155",
-        "145.239.254.11:27165",
-        "145.239.254.11:27175",
-        "145.239.254.11:27185",
-        "145.239.254.11:27195",
-        "145.239.254.11:27205"
+        "145.239.254.11:27155"
     ],
     "na":[
         "74.91.119.107:27015",
@@ -197,6 +193,9 @@ class baited:
             if arg.isnumeric():
                 if int(arg) in (valid_numbers_na if server_region == "na" else valid_numbers_eu):
                     server_number = int(arg)
+
+            elif arg in ["%", "?"] or "ran" in arg:
+                server_number = choice(valid_numbers_eu) if server_region == "eu" else choice(valid_numbers_na)
 
         if not server_number:
             for i, eu_ip in enumerate(BAITED_SERVERS["eu"]):
