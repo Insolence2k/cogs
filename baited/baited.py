@@ -261,5 +261,32 @@ class baited:
 Creates a google link```
             """)
 
+    @commands.command(pass_context=True)
+    async def spam(self, ctx):
+        """
+
+        """
+        SPAM_DURATiON = 2
+        
+        if (ctx.message.author.permissions_in(ctx.message.channel).kick_members):
+            args = ctx.message.content.split(" ")[1:]
+            await self.bot.delete_message(ctx.message)
+
+            if len(ctx.message.mentions) == 1:
+                spam_string = "<@{}>".format(ctx.message.author.id)
+                
+                if len(args) == 2 and args[1].isnumeric():
+                    SPAM_DURATiON = int(args[1])
+
+                for i in range(0, SPAM_DURATiON):
+                    await self.bot.say(spam_string, delete_after=0.0)
+            
+            else:
+                self.bot.say("No user mentioned")
+
+            
+            
+            
+
 def setup(bot):
     bot.add_cog(baited(bot))  
