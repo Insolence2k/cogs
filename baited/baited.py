@@ -271,7 +271,7 @@ Creates a google link```
             await self.bot.delete_message(ctx.message)
 
             if len(ctx.message.mentions) == 1:
-                spam_string = "<@{}> ".format(ctx.message.author.id)
+                spam_string = "<@{}> ".format(ctx.message.mentions[0].id)
                 
                 
                 if len(args) == 2 and args[1].isnumeric():
