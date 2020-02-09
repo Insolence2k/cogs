@@ -266,6 +266,7 @@ Creates a google link```
         """
         [p]spam @user [amount of messages]
         """        
+        SPAM_DURATiON = 1
         if (ctx.message.author.permissions_in(ctx.message.channel).kick_members):
             args = ctx.message.content.split(" ")[1:]
             await self.bot.delete_message(ctx.message)
