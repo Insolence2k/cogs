@@ -264,9 +264,9 @@ Creates a google link```
     @commands.command(pass_context=True)
     async def spam(self, ctx):
         """
-
+        [p]spam @user [amount of @'s]
         """
-        SPAM_DURATiON = 2
+        SPAM_DURATiON = 1 # Amount of messages
         
         if (ctx.message.author.permissions_in(ctx.message.channel).kick_members):
             args = ctx.message.content.split(" ")[1:]
@@ -275,8 +275,9 @@ Creates a google link```
             if len(ctx.message.mentions) == 1:
                 spam_string = "<@{}>".format(ctx.message.author.id)
                 
+                
                 if len(args) == 2 and args[1].isnumeric():
-                    SPAM_DURATiON = int(args[1])
+                    spam_string = spam_string * int(args[1])
 
                 for i in range(0, SPAM_DURATiON):
                     await self.bot.say(spam_string, delete_after=0.0)
