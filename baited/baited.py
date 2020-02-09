@@ -264,7 +264,7 @@ Creates a google link```
     @commands.command(pass_context=True)
     async def spam(self, ctx):
         """
-        [p]spam @user [amount of @'s] * SPAM DURATION (constant at 2)
+        [p]spam @user [amount of messages]
         """        
         if (ctx.message.author.permissions_in(ctx.message.channel).kick_members):
             args = ctx.message.content.split(" ")[1:]
