@@ -281,7 +281,7 @@ Creates a google link```
                     SPAM_AMOUNT = int(args[1])
                 
                 for i in range(0, SPAM_AMOUNT):
-                    if len(spam_string) < 2000:
+                    if len(spam_string) < 2000 - len(spam_string):
                         spam_string += spam_string + spam_string
                     else:
                         break
