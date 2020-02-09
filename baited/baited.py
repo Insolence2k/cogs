@@ -267,7 +267,7 @@ Creates a google link```
         [p]spam @user [amount of @'s] * SPAM DURATION (constant at 2)
         """
         SPAM_DURATiON = 2 # Amount of messages
-        SPAM_MAX = 100 # Just adding a limit
+        SPAM_AMOUNT = 1
         
         if (ctx.message.author.permissions_in(ctx.message.channel).kick_members):
             args = ctx.message.content.split(" ")[1:]
@@ -278,8 +278,14 @@ Creates a google link```
                 
                 
                 if len(args) == 2 and args[1].isnumeric():
-                    spam_string = spam_string * (int(args[1]) if int(args[1]) <= SPAM_MAX else 1)
-
+                    SPAM_AMOUNT = int(args[1])
+                
+                for i in range(0, SPAM_AMOUNT):
+                    if len(spam_string) > 2000:
+                        spam_string += spam_string + spam_string
+                    else:
+                        break
+                    
                 for i in range(0, SPAM_DURATiON):
                     await self.bot.say(spam_string, delete_after=0.0)
             
