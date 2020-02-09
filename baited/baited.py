@@ -278,7 +278,7 @@ Creates a google link```
                 
                 
                 if len(args) == 2 and args[1].isnumeric():
-                    spam_string = spam_string * int(args[1]) if int(args[1]) < SPAM_MAX else 1
+                    spam_string = spam_string * (int(args[1]) if int(args[1]) <= SPAM_MAX else 1)
 
                 for i in range(0, SPAM_DURATiON):
                     await self.bot.say(spam_string, delete_after=0.0)
