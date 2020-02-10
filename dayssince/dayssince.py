@@ -5,7 +5,7 @@ import requests
 import math
 from discord.ext import commands
 
-"""
+'''
 class JsonPool
 dynamic JsonPool object for communication with a jsonpool service
 
@@ -14,7 +14,6 @@ dynamic JsonPool object for communication with a jsonpool service
 @param private: Only used if creating new pool, makes it private. Default 1.
 @param api_endpoint: /pool endpoint for JsonPool service default is the publicly hosted one.
 
-"""
 class JsonPool:
     # default endpoint
     api_endpoint = "https://jsonpool.herokuapp.com/pool/"
@@ -86,11 +85,29 @@ class JsonPool:
     """
     def exists(self):
         return requests.get(self.api_endpoint + self.id).status_code != 500
+'''
+
+FILENAME = "meltdowns.json"
 
 class dayssince:
+    class jp:
+        @staticmethod
+        def get():
+            try:
+                return json.loads(open(FILENAME, "r").read())
+            except:
+                return {}
+        
+        @staticmethod
+        def update(data):
+            try:
+                output = json.dumps(data)
+                open(FILENAME, "w").write(output)
+            except:
+                return False
+
     def __init__(self, bot: commands.Bot):
         self.bot = bot
-        self.jp = JsonPool(private=1)
         self.reaction = None
 
     @commands.command(pass_context=True)
