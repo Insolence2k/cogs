@@ -143,9 +143,10 @@ class dayssince:
                     meltdown_stats[str(user.id)]["c"] = 1 + (meltdown_stats[str(user.id)]["c"] if "c" in meltdown_stats[str(user.id)].keys() else 0)
 
                     self.jp.update(meltdown_stats)
+                    meltdown_stats
 
                     new_embed = self.make_embed(meltdown_stats, meltdown_user)
-                    await self.bot.edit_message(meltdown_message, embed=new_embed)
+                    await meltdown_message.edit(embed=new_embed)
 
         await self.bot.delete_message(ctx.message)
 
