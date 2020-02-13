@@ -64,8 +64,8 @@ BAITED_RANKS = [
 ]
 
 BAITED_DEFINE = {
-    "default":"Not Josh",
-    "164559211320180736":"Fuck boy"
+    "default":"not Josh",
+    "164559211320180736":"a fuck boy"
 }
 
 class baited:
