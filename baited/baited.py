@@ -306,7 +306,7 @@ Creates a google link```
         args = ctx.message.content.split(" ")[1:]
         definition = BAITED_DEFINE["default"]
 
-        if len(ctx.message.mentions) == 1:
+        if len(ctx.message.mentions) == 1 and len(args) == 1:
             user_id = str(ctx.message.mentions[0].id)
 
             if user_id in BAITED_DEFINE:
