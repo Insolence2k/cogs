@@ -317,7 +317,7 @@ Creates a google link```
         elif len(args) >= 3 and args[0] == "set" and len(ctx.message.mentions) == 1:
             user_id = str(ctx.message.mentions[0].id)
             definition = ' '.join(args[2:])
-            BAITED_DEFINE[user_id] == definition
+            BAITED_DEFINE[user_id] = definition
 
             await self.bot.say("Definition for <@{}> is now {}".format(user_id, definition), delete_after=10)
             await self.bot.delete_message(ctx.message)
