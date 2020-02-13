@@ -63,6 +63,11 @@ BAITED_RANKS = [
     {"name":"The Global Elite", "value":"17500 Points", "key":"ge"}
 ]
 
+BAITED_DEFINE = {
+    "default":"Not Josh",
+    "164559211320180736":"Fuck boy"
+}
+
 class baited:
     def __init__(self, bot: commands.Bot):
         self.bot = bot
@@ -289,6 +294,36 @@ Creates a google link```
             
             else:
                 self.bot.say("No user mentioned")
+    
+    @commands.command(pass_context=True)
+    async def define(self, ctx):
+        """
+        [p]define (user) -> returns player status on discord.
+
+        [p]define set (user) [definition...]
+        """
+
+        args = ctx.message.content.split(" ")[1:]
+        definition = BAITED_DEFINE["default"]
+
+        if len(ctx.message.mentions) == 1:
+            user_id = str(ctx.message.mentions[0].id)
+
+            if user_id in BAITED_DEFINE:
+                definition = BAITED_DEFINE[user_id]
+            
+            await self.bot.say("<@{}> is {}".format(user_id, definition))
+
+        elif len(args) >= 3 and args[0] == "set" and len(ctx.message.mentions) == 1:
+            user_id = str(ctx.message.mentions[0].id)
+            definition = ' '.join(args[2:])
+            BAITED_DEFINE[user_id] == definition
+
+            await self.bot.say("Definition for <@{}> is now {}".format(user_id, definition), delete_after=10)
+            await self.bot.delete_message(ctx.message)
+        
+        
+
 
             
             
