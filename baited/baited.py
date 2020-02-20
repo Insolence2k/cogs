@@ -2,6 +2,8 @@ from random import choice
 from discord import Embed
 from discord.ext import commands
 
+BAITED_RECOVER_URL = "https://support.steampowered.com/kb_article.php?ref=5421-QTFB-3090"
+
 BAITED_SERVERS = {
     "meta":{
         "eu":":flag_eu: #{} Baited 5v5 Competitive !knife !ws !gloves ",
@@ -321,13 +323,11 @@ Creates a google link```
 
             await self.bot.say("Definition for <@{}> is now {}".format(user_id, definition), delete_after=10)
             await self.bot.delete_message(ctx.message)
-        
-        
 
-
-            
-            
-            
+    @commands.command(pass_context=True)
+    async def recover(self, ctx):
+        await self.bot.say(BAITED_RECOVER_URL)
+        await self.bot.delete_message(ctx.message)
 
 def setup(bot):
     bot.add_cog(baited(bot))  
