@@ -328,6 +328,19 @@ Creates a google link```
     async def recover(self, ctx):
         await self.bot.say(BAITED_RECOVER_URL)
         await self.bot.delete_message(ctx.message)
+        
+        
+     @commands.command(pass_context=True)
+    async def copyurl(self, ctx):
+        """
+        Command on Insolence's request sharing a gif on how to copy Steam URL. [p]copyurl
+        """
+        embed = Embed(title="Copying your Steam Link", color=0x00e1ff)
+        embed.set_image(url="https://i.imgur.com/5a8o4um.mp4")
+        await self.bot.say(embed=embed)
+        await self.bot.delete_message(ctx.message)
+        
+        
 
 def setup(bot):
     bot.add_cog(baited(bot))  
