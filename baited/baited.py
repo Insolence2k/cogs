@@ -330,7 +330,7 @@ Creates a google link```
         await self.bot.delete_message(ctx.message)
         
         
-     @commands.command(pass_context=True)
+    @commands.command(pass_context=True)
     async def copyurl(self, ctx):
         """
         Command on Insolence's request sharing a gif on how to copy Steam URL. [p]copyurl
