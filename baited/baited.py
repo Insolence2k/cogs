@@ -335,8 +335,8 @@ Creates a google link```
         """
         Command on Insolence's request sharing a gif on how to copy Steam URL. [p]copyurl
         """
-        embed = Embed(title="Copying your Steam Link", color=0x00e1ff)
-        embed.set_image(url="https://i.imgur.com/5a8o4um.mp4")
+        embed = Embed(title="Copying your Steam Profile Link", color=0x00e1ff)
+        embed.set_image(url="https://i.imgur.com/M3LDnJm.gif")
         await self.bot.say(embed=embed)
         await self.bot.delete_message(ctx.message)
         
