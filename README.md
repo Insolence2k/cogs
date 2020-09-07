@@ -1,5 +1,5 @@
 # cogs
-COGS 4 Aaron
+Cogs 4 Discord
 
 New command -steam added to parse and retrieve steam profile information.
 -steam [Profile identifier, url, id and such] [Approximate search term such as steamid3, profile created or last logoff (not required)] 
